@@ -1,8 +1,23 @@
 {
-    "builds": [
-        {"src": "public/**/*", "use": "@vercel/static"}
-    ],
+   "version": 2,
     "routes": [
-        {"src": "/(.*)", "dest": "/public/$1" }
+        {"src": "/mainpage.html", "dest": "/mainpage.html" },
+        {"src": "/mainpage_userdistinct.html", "dest": "/mainpage_userdistinct.html" },
+        {"src": "/UserAdmin_Dashboard.html", "dest": "/UserAdmin_Dashboard.html" },
+        {"src": "/UserAdmin_Faculties.html", "dest": "/UserAdmin_Faculties.html" },
+        {"src": "/UserAdmin_login-signup.html", "dest": "/UserAdmin_login-signup.html" },
+        {"src": "/UserAdmin_Profile.html", "dest": "/UserAdmin_Profile.html" },
+        {"src": "/UserAdmin_Trainings.html", "dest": "/UserAdmin_Trainings.html" },
+        {"src": "/UserFaculty_Dashboard.html", "dest": "/UserFaculty_Dashboard.html" },
+        {"src": "/UserFaculty_login-signup.html", "dest": "/UserFaculty_login-signup.html" },
+        {"src": "/UserFaculty_profile.html", "dest": "/UserFaculty_profile.html" },
+        {"src": "/UserFaculty_SucceededTrainings.html", "dest": "/UserFaculty_SucceededTrainings.html" },
+        {"src": "/UserFaculty_Trainings.html", "dest": "/UserFaculty_Trainings.html" },
+        {"src": "/UserTD_Dashboard.html", "dest": "/UserTD_Dashboard.html" },
+        {"src": "/UserTD_login-signup.html", "dest": "/UserTD_login-signup.html" },
+        {"src": "/UserTD_Profile.html", "dest": "/UserTD_Profile.html" },
+        {"src": "/UserTD_Trainings.html", "dest": "/UserTD_Trainings.html" },
+        {"src": "/assets/(.*)", "dest": "/assets/$1" },
+        {"src": "/(.*)", "dest": "/$1" }
     ]
 }
