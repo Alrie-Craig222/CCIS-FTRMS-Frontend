@@ -677,11 +677,6 @@
 
 
 var form = document.getElementById("myForm"),
-    imgInput = document.querySelector(".img"),
-    file = document.getElementById("imgInput"),
-    userName = document.getElementById("name"),
-    // email = document.getElementById("email"),
-    // phone = document.getElementById("phone"),
     hour = document.getElementById("hour"),
     type = document.getElementById("type"),
     submitBtn = document.querySelector(".submit"),
@@ -700,41 +695,23 @@ newUserBtn.addEventListener('click', ()=> {
     submitBtn.innerText = 'Submit',
     modalTitle.innerText = "Fill the Form"
     isEdit = false
-    imgInput.src = "id Icon.png"
     form.reset()
 })
 
 
-file.onchange = function(){
-    if(file.files[0].size < 1000000){ // 1MB = 1000000
-        var fileReader = new FileReader();
 
-        fileReader.onload = function(e){
-            imgUrl = e.target.result
-            imgInput.src = imgUrl
-        }
-
-        fileReader.readAsDataURL(file.files[0])
-    }
-    else{
-        alert("This file is too large!")
-    }
-}
 function showInfo(){
     document.querySelectorAll('.employeeDetails').forEach(info => info.remove())
     getData.forEach((element, index) => {
         let createElement = `<tr class="employeeDetails">
-            <td>${index+1}</td>
-            <td><img src="${element.picture}" alt="" width="50" height="50"></td>
-            <td>${element.employeeName}</td>
-       
+            <td>${index+1}</td>     
             <td>${element.employeeHour}</td>
             <td>${element.employeeType}</td>
 
             <td>
               
 
-                <button class="btn btn-primary" onclick="editInfo(${index}, '${element.picture}', '${element.employeeName}', '${element.employeeHour}', '${element.employeeType}')" data-bs-toggle="modal" data-bs-target="#userForm"><i class="bi bi-pencil-square"></i></button>
+                <button class="btn btn-primary" onclick="editInfo(${index}, '${element.employeeHour}', '${element.employeeType}')" data-bs-toggle="modal" data-bs-target="#userForm"><i class="bi bi-pencil-square"></i></button>
 
                 <button class="btn btn-danger" onclick="deleteInfo(${index})"><i class="bi bi-trash"></i></button>
                             
@@ -746,24 +723,16 @@ function showInfo(){
 }
 showInfo()
 
-function readInfo(pic, name, hour, type, sDate){
-    document.querySelector('.showImg').src = pic,
-    document.querySelector('#showName').value = name,
-    // document.querySelector("#showEmail").value = email,
-    // document.querySelector("#showPhone").value = phone,
+function readInfo(hour, type){
     document.querySelector("#showHour").value = hour,
-    document.querySelector("#showType").value = type,
-    document.querySelector("#showsDate").value = sDate
+    document.querySelector("#showType").value = type
+   
 }
 
 
-function editInfo(index, pic, name, Hour, Type){
+function editInfo(index, Hour){
     isEdit = true
     editId = index
-    imgInput.src = pic
-    userName.value = name
-    // email.value = Email,
-    // phone.value = Phone,
     hour.value = Hour,
     type.value = Type
 
@@ -785,10 +754,6 @@ form.addEventListener('submit', (e)=> {
     e.preventDefault()
 
     const information = {
-        picture: imgInput.src == undefined ? "id Icon.png" : imgInput.src,
-        employeeName: userName.value,
-        // employeeEmail: email.value,
-        // employeePhone: phone.value,
         employeeHour: hour.value,
         employeeType: type.value,
        
@@ -811,10 +776,8 @@ form.addEventListener('submit', (e)=> {
 
     form.reset()
 
-    imgInput.src = "id Icon.png"  
 
-    // modal.style.display = "none"
-    // document.querySelector(".modal-backdrop").remove()
+
 
     
 })

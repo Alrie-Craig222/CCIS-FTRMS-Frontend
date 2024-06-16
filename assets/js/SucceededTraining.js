@@ -680,10 +680,6 @@ var form = document.getElementById("myForm"),
     imgInput = document.querySelector(".img"),
     file = document.getElementById("imgInput"),
     userName = document.getElementById("name"),
-    // email = document.getElementById("email"),
-    // phone = document.getElementById("phone"),
-    hour = document.getElementById("hour"),
-    type = document.getElementById("type"),
     submitBtn = document.querySelector(".submit"),
     userInfo = document.getElementById("data"),
     modal = document.getElementById("userForm"),
@@ -727,14 +723,9 @@ function showInfo(){
             <td>${index+1}</td>
             <td><img src="${element.picture}" alt="" width="50" height="50"></td>
             <td>${element.employeeName}</td>
-       
-            <td>${element.employeeHour}</td>
-            <td>${element.employeeType}</td>
 
             <td>
               
-
-                <button class="btn btn-primary" onclick="editInfo(${index}, '${element.picture}', '${element.employeeName}', '${element.employeeHour}', '${element.employeeType}')" data-bs-toggle="modal" data-bs-target="#userForm"><i class="bi bi-pencil-square"></i></button>
 
                 <button class="btn btn-danger" onclick="deleteInfo(${index})"><i class="bi bi-trash"></i></button>
                             
@@ -746,29 +737,9 @@ function showInfo(){
 }
 showInfo()
 
-function readInfo(pic, name, hour, type, sDate){
+function readInfo(pic, name){
     document.querySelector('.showImg').src = pic,
-    document.querySelector('#showName').value = name,
-    // document.querySelector("#showEmail").value = email,
-    // document.querySelector("#showPhone").value = phone,
-    document.querySelector("#showHour").value = hour,
-    document.querySelector("#showType").value = type,
-    document.querySelector("#showsDate").value = sDate
-}
-
-
-function editInfo(index, pic, name, Hour, Type){
-    isEdit = true
-    editId = index
-    imgInput.src = pic
-    userName.value = name
-    // email.value = Email,
-    // phone.value = Phone,
-    hour.value = Hour,
-    type.value = Type
-
-    submitBtn.innerText = "Update"
-    modalTitle.innerText = "Update The Form"
+    document.querySelector('#showName').value = name
 }
 
 
@@ -787,11 +758,6 @@ form.addEventListener('submit', (e)=> {
     const information = {
         picture: imgInput.src == undefined ? "id Icon.png" : imgInput.src,
         employeeName: userName.value,
-        // employeeEmail: email.value,
-        // employeePhone: phone.value,
-        employeeHour: hour.value,
-        employeeType: type.value,
-       
     }
 
     if(!isEdit){

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>UPCOMING TRAININGS</title>
+  <title>CCIS Faculties</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -29,7 +29,13 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/dashboard.css" rel="stylesheet">
 
- 
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Nov 17 2023 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
@@ -263,49 +269,38 @@
 
   </header><!-- End Header -->
 
-
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+        <a class="nav-link collapsed" href="UserAdmin_Dashboard.html">
+          <i class="bi bi-house-check-fill"></i>
+          <span>Home</span>
         </a>
-      </li><!-- End Dashboard Nav -->
+      </li><!-- End Home Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
+        <a class="nav-link " href="UserAdmin_Faculties.html">
+          <i class="bi bi-card-list"></i>
+          <span>Faculties</span>
         </a>
-      </li><!-- End Profile Page Nav -->
+      </li><!-- End Lists of CCIS Faculties Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link " href="admin_upcomingTrainings.html">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Upcoming Trainings</span>
+        <a class="nav-link collapsed" href="UserAdmin_Trainings.html">
+          <i class="bi bi-view-list"></i>
+          <span>Trainings</span>
         </a>
-          </li><!-- End Tables Nav -->
-
-      
+      </li><!-- End Upcoming Trainings Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li><!-- End Contact Page Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-right"></i>
+        <a class="nav-link collapsed" href="UserAdmin_login-signup.html">
+          <i class="bi bi-box-arrow-left"></i>
           <span>Logout</span>
         </a>
-      </li><!-- End Login Page Nav -->
-
-     
+      </li><!-- End Logout Page Nav -->
 
     </ul>
 
@@ -314,73 +309,191 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Upcoming Trainings</h1>
+      <h1>Faculty</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item">Trainings</li>
-          <li class="breadcrumb-item active">Upcoming Trainings</li>
+          <li class="breadcrumb-item">New Faculty</a></li>
+          <li class="breadcrumb-item active">Add New Faculty</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
+    <section class="p-3">
 
-          <div class="card">
-            <div class="card-body">
-              <br>
-             
-              <div class="col-9">
-                <p>Below are the upcoming trainings open for all CSU-CCIS faculties </p>
+        <div class="row">
+            <div class="col-10">
+                <button class="btn btn-dark newUser" data-bs-toggle="modal" data-bs-target="#userForm">Add New Faculty <i class="bi bi-people"></i></button> 
             </div>
-             
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th>
-                      Training Title
-                    </th>
-                    <th data-type="date" data-format="MM/DD/YYYY">Start Date</th>
-                    <th data-type="date" data-format="MM/DD/YYYY">End Date</th>
-                     <th data-type="time"># of Hours</th>
-                    <th>Type</th>
-                    <th>Conductor/Sponsor</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Business Development Approach and Creating a Perfect Pitch 2024</td>
-                    <td>01/08/2024</td>
-                    <td>01/08/2024</td>
-                    <td>16</td>
-                    <td>Soft Skills Development</td>
-                    <td>Resource Person: Jenelyn Refamonte Conducted by DOST CARAGA 2024</td>
-                  </tr>
+        </div>
 
-                  <tr>
-                    <td>Creative & Practical Assessment Activities for Remote Learning 2024</td>
-                    <td>02/02/2024</td>
-                    <td>02/02/2024</td>
-                    <td>4</td>
-                    <td>Soft Skills Development</td>
-                    <td>DICT Mindanao Cluster</td>
-                  </tr>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-striped table-hover mt-3 text-center table-bordered">
 
-                  <tr>
-                    <td>Cross-Platform Coding Bootcampl Using Flutter 2024</td>
-                    <td>03/15/2024</td>
-                    <td>04/02/2024</td>
-                    <td>100</td>
-                    <td>Technical Skills Development</td>
-                    <td>DICT-Digital Jobe PH</td>
-                  </tr>
-                 
-                </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Picture</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Contact Number</th>
+                            <th>Date Joined</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="data"></tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!--Modal Form-->
+    <div class="modal fade" id="userForm">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Fill the Form</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form action="#" id="myForm">
+                        <div class="card imgholder">
+                            <label for="imgInput" class="upload">
+                                <input type="file" name="" id="imgInput">
+                                <i class="bi bi-plus-circle-dotted"></i>
+                            </label>
+                            <img src="assets/img/picon.png" alt="" width="200" height="200" class="img">
+                        </div>
+
+                        <div class="inputField">
+                            <div>
+                                <label for="name">First Name:</label>
+                                <input type="text" name="" id="name" required>
+                            </div>
+                            <div>
+                                <label for="email">Last Name:</label>
+                                <input type="text" name="" id="email" required>
+                            </div>
+                            <div>
+                                <label for="phone">Email:</label>
+                                <input type="email" name="" id="phone" required>
+                            </div>
+                            <div>
+                                <label for="hour">Contact Number:</label>
+                                <input type="text" name="" id="hour" minlength="11" maxlength="11" required>
+                            </div>
+                            <div>
+                                <label for="type">Date Joined:</label>
+                                <input type="date" name="" id="type" required>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Read Data Modal-->
+    <div class="modal fade" id="readData">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Faculty Information Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <form action="#" id="myForm">
+
+                        <div class="card imgholder">
+                            <img src="assets/img/icons/Profile Icon.png" alt="" width="200" height="200" class="showImg">
+                        </div>
+
+                        <div class="inputField">
+                            <div>
+                                <label for="name">First Name:</label>
+                                <input type="text" name="" id="showName" disabled>
+                            </div>
+                            <div>
+                                <label for="email">Last Name:</label>
+                                <input type="text" name="" id="showEmail" disabled>
+                            </div>
+                            <div>
+                                <label for="phone">Email:</label>
+                                <input type="email" name="" id="showPhone" disabled>
+                            </div>
+                            <div>
+                                <label for="hour">Contact Number:</label>
+                                <input type="text" name="" id="showHour" minlength="11" maxlength="11" disabled>
+                            </div>
+                            <div>
+                                <label for="type">Date Joined:</label>
+                                <input type="date" name="" id="showType" disabled>
+                            </div>
+                            <br><br>
+                            <div class="btn-group" role="group" aria-label="Basic outlined example">
+                              <button type="button" class="btn btn-outline-dark" href="UserFaculty_SucceedTrainings.html"></button>>Succeded Trainings</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                </div>
+
+                <div class="tab-pane fade pt-3" id="profile-change-password">
+                  <!-- Change Password Form -->
+                  <form>
+
+                    <div class="row mb-3">
+                      <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="password" type="password" class="form-control" id="currentPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
+                      <div class="col-md-8 col-lg-9">
+                        <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                      </div>
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                  </form><!-- End Change Password Form -->
+
+                </div>
+
+              </div><!-- End Bordered Tabs -->
 
             </div>
           </div>
@@ -389,166 +502,21 @@
       </div>
     </section>
 
-    <!-- <main id="main" class="main"> -->
-<br><br>
-  
-      <section class="p-3">
-  
-          <div class="row">
-              <div class="col-10">
-                  <button class="btn btn-dark newUser" data-bs-toggle="modal" data-bs-target="#userForm">Training Registration</button> 
-                  <br><br>
-                  <b><span>Below are your registered trainings</span></b>
-              </div>
-          </div>
-  
-          <div class="row">
-              <div class="col-12">
-                  <table class="table table-striped table-hover mt-3 text-center table-bordered">
-  
-                      <thead>
-                          <tr>
-                              <th>Registration ID</th>
-                              <th>Faculty ID</th>
-                              <th>Training Title</th>
-                              <th>Registration Date</th>
-                              <th>Action</th>
-                          </tr>
-                      </thead>
-  
-                      <tbody id="data"></tbody>
-  
-                  </table>
-              </div>
-          </div>
-  
-      </section>
-  
-  
-      <!--Modal Form-->
-      <div class="modal fade" id="userForm">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-  
-                  <div class="modal-header">
-                      <h4 class="modal-title">Fill the Form</h4>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-  
-                  <div class="modal-body">
-  
-                      <form action="#" id="myForm">
-  
-                          <div class="card imgholder">
-                              <label for="imgInput" class="upload">
-                                  <input type="file" name="" id="imgInput">
-                                  <i class="bi bi-plus-circle-dotted"></i>
-                              </label>
-                              <img src="assets/img/icons/id Icon.png" alt="" width="200" height="200" class="img">
-                          </div>
-  
-                          <div class="inputField">
-                              <div>
-                                  <label for="name">Faculty ID:</label>
-                                  <input type="text" name="" id="name" required>
-                              </div>
-                              <!-- <div>
-                                  <label for="email">Last Name:</label>
-                                  <input type="text" name="" id="email" required>
-                              </div>
-                              <div>
-                                  <label for="phone">Email Address:</label>
-                                  <input type="email" name="" id="phone" required>
-                              </div> -->
-                              <div>
-                                  <label for="hour">Training Title:</label>
-                                  <input type="text" name="" id="hour" required>
-                              </div>
-                              <div>
-                                  <label for="type">Current Date:</label>
-                                  <input type="date" name="" id="type" required>
-                              </div>
-                             
-                          </div>
-  
-                      </form>
-                  </div>
-  
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="submit" form="myForm" class="btn btn-primary submit">Submit</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  
-      <!--Read Data Modal-->
-      <!-- <div class="modal fade" id="readData">
-          <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-  
-                  <div class="modal-header">
-                      <h4 class="modal-title">Faculty Information Details</h4>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-  
-                  <div class="modal-body">
-  
-                      <form action="#" id="myForm">
-  
-                          <div class="card imgholder">
-                              <img src="assets/img/icons/Profile Icon.png" alt="" width="200" height="200" class="showImg">
-                          </div>
-  
-                          <div class="inputField">
-                              <div>
-                                  <label for="name">First Name:</label>
-                                  <input type="text" name="" id="showName" disabled>
-                              </div>
-                              <div>
-                                  <label for="email">Last Name:</label>
-                                  <input type="text" name="" id="showEmail" disabled>
-                              </div>
-                              <div>
-                                  <label for="phone">Active Email Address:</label>
-                                  <input type="email" name="" id="showPhone" disabled>
-                              </div>
-                              <div>
-                                  <label for="hour">Training Title:</label>
-                                  <input type="text" name="" id="showHour" disabled>
-                              </div>
-                              <div>
-                                  <label for="type">Registration Date:</label>
-                                  <input type="date" name="" id="showType" disabled>
-                              </div>
-                             
+  </main><!-- End #main -->
 
-                            
-                          </div>
-  
-                      </form>
-                  </div>
-              </div>
-          </div>
-      </div> -->
-  
-  
-                  </div>
-  
-                
-  
-                </div><!-- End Bordered Tabs -->
-  
-              </div>
-            </div>
-  
-          </div>
-        </div>
-      </section>
-  
-    <!-- </main> -->
-    <!-- End #main -->
-  
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -563,7 +531,7 @@
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/admin_addFaculty.js"></script>
 
 </body>
 
