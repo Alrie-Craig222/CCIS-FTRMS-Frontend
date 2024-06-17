@@ -5,6 +5,129 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+import apiUrl from './apiConfig'; // Import your API base URL or ngrok URL
+// Import apiUrl from './apiConfig';
+const apiUrl = 'http://your-api-url'; // Replace with your actual API base URL
+
+// Function to fetch trainings from API
+function fetchTrainings() {
+  fetch(`${apiUrl}/api/training`)
+    .then(response => response.json())
+    .then(data => displayTrainings(data))
+    .catch(error => console.error('Error fetching trainings:', error));
+}
+
+// Function to display trainings in the HTML table
+function displayTrainings(trainings) {
+  const tableBody = document.getElementById('data');
+  tableBody.innerHTML = '';
+
+  trainings.forEach(training => {
+    const row = `
+      <tr>
+        <td>${training.id}</td>
+        <td><a href="${training.approved_letter_url}" target="_blank">View</a></td>
+        <td>${training.title}</td>
+        <td>${training.start_date}</td>
+        <td>${training.end_date}</td>
+        <td>${training.hours}</td>
+        <td>${training.type}</td>
+        <td>${training.site}</td>
+        <td>
+          <button class="btn btn-info btn-sm" onclick="readTraining(${training.id})">View</button>
+          <button class="btn btn-warning btn-sm" onclick="editTraining(${training.id})">Edit</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteTraining(${training.id})">Delete</button>
+        </td>
+      </tr>
+    `;
+    tableBody.innerHTML += row;
+  });
+}
+
+// Function to add a new training via API
+function addTraining(trainingData) {
+  fetch(`${apiUrl}/api/training`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(trainingData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    fetchTrainings(); // Refresh the table after adding
+    $('#userForm').modal('hide'); // Hide the modal after successful submission
+  })
+  .catch(error => console.error('Error adding training:', error));
+}
+
+// Function to read a single training via API
+function readTraining(id) {
+  fetch(`${apiUrl}/api/training/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      // Populate modal with training details
+      document.getElementById('showName').value = data.title;
+      document.getElementById('showEmail').value = data.start_date;
+      document.getElementById('showPhone').value = data.end_date;
+      document.getElementById('showHour').value = data.hours;
+      document.getElementById('showType').value = data.type;
+      document.getElementById('showsDate').value = data.site;
+      $('#readData').modal('show'); // Show modal with training details
+    })
+    .catch(error => console.error('Error fetching training details:', error));
+}
+
+// Function to update a training via API
+function updateTraining(id, updatedData) {
+  fetch(`${apiUrl}/api/training/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(updatedData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    fetchTrainings(); // Refresh the table after updating
+    $('#readData').modal('hide'); // Hide the modal after successful update
+  })
+  .catch(error => console.error('Error updating training:', error));
+}
+
+// Function to delete a training via API
+function deleteTraining(id) {
+  fetch(`${apiUrl}/api/training/${id}`, {
+    method: 'DELETE',
+  })
+  .then(response => {
+    if (response.ok) {
+      fetchTrainings(); // Refresh the table after deletion
+    } else {
+      console.error('Error deleting training');
+    }
+  })
+  .catch(error => console.error('Error deleting training:', error));
+}
+
+// Event listener for submitting the form
+document.getElementById('myForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const formData = {
+    title: document.getElementById('name').value,
+    start_date: document.getElementById('email').value,
+    end_date: document.getElementById('phone').value,
+    hours: document.getElementById('hour').value,
+    type: document.getElementById('type').value,
+    site: document.getElementById('sDate').value,
+    approved_letter_url: '', // Add functionality to upload and store files if needed
+  };
+  addTraining(formData);
+});
+
+// Initial fetch of trainings when the page loads
+fetchTrainings();
+
 (function() {
   "use strict";
 

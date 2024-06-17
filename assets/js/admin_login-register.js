@@ -1,75 +1,86 @@
-
-
-// Add event listeners to the login and signup forms
-document.querySelector('.login-form form').addEventListener('submit', loginUser);
-document.querySelector('.signup-form form').addEventListener('submit', registerUser);
+import apiUrl from './apiConfig'; // Import your API base URL or ngrok URL
 
 // Function to handle user login
-function loginUser(event) {
-  event.preventDefault();
-
-  // Get the form data
-  const email = document.querySelector('.login-form input[type="text"]').value;
-  const password = document.querySelector('.login-form input[type="password"]').value;
-
-  // Send the login data to the Laravel backend
-  fetch('/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ email, password })
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Handle the response from the Laravel backend
-    if (data.success) {
-      // Redirect the user to the dashboard or another page
-      window.location.href = 'admin_profile.html';
-    } else {
-      // Display an error message
-      alert(data.message);
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-  });
+export function loginUser(email, password) {
+    return fetch(`${apiUrl}/api/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Login failed.');
+        }
+    })
+    .catch(error => {
+        console.error('Login error:', error);
+        throw error; // Propagate the error for further handling
+    });
 }
 
-// Function to handle user registration
-function registerUser(event) {
-  event.preventDefault();
-
-  // Get the form data
-  const firstName = document.querySelector('.signup-form input[name="first_name"]').value;
-  const lastName = document.querySelector('.signup-form input[name="last_name"]').value;
-  const email = document.querySelector('.signup-form input[name="email"]').value;
-  const password = document.querySelector('.signup-form input[name="password"]').value;
-
-  // Send the registration data to the Laravel backend
-  fetch('/user', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-    },
-    body: JSON.stringify({ first_name: firstName, last_name: lastName, email, password })
-  })
-  .then(response => response.json())
-  .then(data => {
-    // Handle the response from the Laravel backend
-    if (data.success) {
-      // Redirect the user to the login page or another page
-      window.location.href = 'admin_profile.html';
-    } else {
-      // Display an error message
-      alert(data.message);
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-  });
+// Function to handle user signup
+export function signupUser(firstName, lastName, email, password) {
+    return fetch(`${apiUrl}/api/user`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ first_name: firstName, last_name: lastName, email, password })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Signup failed.');
+        }
+    })
+    .catch(error => {
+        console.error('Signup error:', error);
+        throw error; // Propagate the error for further handling
+    });
 }
+
+// Event listener for login form submission
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+    try {
+        const data = await loginUser(email, password);
+        // Handle successful login (e.g., redirect to dashboard)
+        console.log('Login successful:', data);
+        window.location.href = 'UserAdmin_Dashboard.html';
+    } catch (error) {
+        console.error('Login error:', error);
+        // Handle login error (e.g., display error message)
+    }
+});
+
+// Event listener for signup form submission
+document.getElementById('signupForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+    
+    const firstName = document.getElementById('signupFirstName').value;
+    const lastName = document.getElementById('signupLastName').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+
+    try {
+        const data = await signupUser(firstName, lastName, email, password);
+        // Handle successful signup (e.g., show success message)
+        console.log('Signup successful:', data);
+        // Optionally redirect to a login page after signup
+        window.location.href = 'UserAdmin_login-signup.html';
+    } catch (error) {
+        console.error('Signup error:', error);
+        // Handle signup error (e.g., display error message)
+    }
+});

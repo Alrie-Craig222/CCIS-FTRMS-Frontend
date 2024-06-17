@@ -5,6 +5,58 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+// Example module using fetch for API calls (userService.js)
+// Function to fetch all faculty members
+import apiUrl from './apiConfig'; // Import your API base URL or ngrok URL
+export function fetchFaculty() {
+  return fetch(`${apiUrl}/api/faculty`)
+      .then(response => response.json())
+      .catch(error => {
+          console.error('Error fetching faculty members:', error);
+      });
+}
+
+// Function to create a new faculty member
+export function createFaculty(data) {
+  return fetch(`${apiUrl}/api/faculty`, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .catch(error => {
+      console.error('Error creating faculty member:', error);
+  });
+}
+
+// Function to update a faculty member by ID
+export function updateFaculty(id, data) {
+  return fetch(`${apiUrl}/api/faculty/update/${id}`, {
+      method: 'PUT',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => response.json())
+  .catch(error => {
+      console.error(`Error updating faculty member ${id}:`, error);
+  });
+}
+
+// Function to delete a faculty member by ID
+export function deleteFaculty(id) {
+  return fetch(`${apiUrl}/api/faculty/${id}`, {
+      method: 'DELETE',
+  })
+  .then(response => response.json())
+  .catch(error => {
+      console.error(`Error deleting faculty member ${id}:`, error);
+  });
+}y
+
 (function() {
   "use strict";
 

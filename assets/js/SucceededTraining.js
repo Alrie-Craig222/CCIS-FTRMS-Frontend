@@ -5,6 +5,105 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+import apiUrl from './apiConfig'; // Import your API base URL or ngrok URL
+
+// Function to fetch and display succeeded training sessions
+function fetchSucceededTrainings() {
+    fetch(`${apiUrl}/api/succeed`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('data');
+            tableBody.innerHTML = '';
+
+            data.forEach(training => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${training.id}</td>
+                    <td>
+                        <img src="${training.certificateUrl}" alt="Certificate" width="100" height="100">
+                    </td>
+                    <td>${training.trainingTitle}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#readData" onclick="showTrainingDetails(${training.id})">View Details</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteTraining(${training.id})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching succeeded trainings:', error);
+        });
+}
+
+// Function to handle form submission for adding new succeeded training
+document.addEventListener('DOMContentLoaded', function() {
+    const myForm = document.getElementById('myForm');
+
+    myForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(myForm);
+        const trainingTitle = formData.get('trainingTitle');
+        const certificate = formData.get('certificate');
+
+        // Assuming the backend expects 'certificate' as a file upload field
+        const requestData = {
+            method: 'POST',
+            body: formData,
+        };
+
+        fetch(`${apiUrl}/api/succeed`, requestData)
+            .then(response => response.json())
+            .then(data => {
+                fetchSucceededTrainings(); // Refresh table after successful addition
+                myForm.reset();
+                $('#userForm').modal('hide'); // Close modal after successful submission
+            })
+            .catch(error => {
+                console.error('Error adding succeeded training:', error);
+            });
+    });
+
+    // Fetch and display succeeded trainings when the page loads
+    fetchSucceededTrainings();
+});
+
+// Function to show training details in modal
+function showTrainingDetails(trainingId) {
+    fetch(`${apiUrl}/api/succeed/${trainingId}`)
+        .then(response => response.json())
+        .then(training => {
+            document.getElementById('showName').value = training.trainingTitle;
+            document.querySelector('.showImg').src = training.certificateUrl;
+            // Populate other fields as needed
+        })
+        .catch(error => {
+            console.error('Error fetching training details:', error);
+        });
+}
+
+// Function to delete a succeeded training
+function deleteTraining(trainingId) {
+    const confirmDelete = confirm('Are you sure you want to delete this succeeded training?');
+
+    if (confirmDelete) {
+        fetch(`${apiUrl}/api/succeed/${trainingId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    fetchSucceededTrainings(); // Refresh table after deletion
+                } else {
+                    console.error('Failed to delete succeeded training');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting succeeded training:', error);
+            });
+    }
+}
+
 (function() {
   "use strict";
 

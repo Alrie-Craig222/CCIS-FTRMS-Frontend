@@ -5,6 +5,110 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+import apiUrl from './apiConfig'; // Import your API base URL or ngrok URL
+
+// Function to fetch and display registered trainings
+function fetchRegisteredTrainings() {
+    fetch(`${apiUrl}/api/trainingRegistration`)
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('data');
+            tableBody.innerHTML = '';
+
+            data.forEach(training => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${training.id}</td>
+                    <td>${training.trainingTitle}</td>
+                    <td>${training.registrationDate}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#readData" onclick="showTrainingDetails(${training.id})">View Details</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteTraining(${training.id})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching registered trainings:', error);
+        });
+}
+
+// Function to handle form submission for new training registration
+document.addEventListener('DOMContentLoaded', function() {
+    const myForm = document.getElementById('myForm');
+
+    myForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(myForm);
+        const trainingTitle = formData.get('trainingTitle');
+        const filledDate = formData.get('filledDate');
+
+        const requestData = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                trainingTitle,
+                registrationDate: filledDate, // Assuming your API expects this field name
+            }),
+        };
+
+        fetch(`${apiUrl}/api/trainingRegistration`, requestData)
+            .then(response => response.json())
+            .then(data => {
+                // Assuming you want to refresh the table after successful registration
+                fetchRegisteredTrainings();
+                myForm.reset();
+                $('#userForm').modal('hide'); // Close modal after successful submission
+            })
+            .catch(error => {
+                console.error('Error registering training:', error);
+            });
+    });
+
+    // Fetch and display registered trainings when the page loads
+    fetchRegisteredTrainings();
+});
+
+// Function to show training details in modal
+function showTrainingDetails(trainingId) {
+    fetch(`${apiUrl}/api/trainingRegistration/${trainingId}`)
+        .then(response => response.json())
+        .then(training => {
+            // Assuming you have modal fields with IDs like showName, showEmail, etc.
+            document.getElementById('showName').value = training.trainingTitle;
+            document.getElementById('showEmail').value = training.registrationDate;
+            // Populate other fields as needed
+        })
+        .catch(error => {
+            console.error('Error fetching training details:', error);
+        });
+}
+
+// Function to delete a training registration
+function deleteTraining(trainingId) {
+    const confirmDelete = confirm('Are you sure you want to delete this training registration?');
+
+    if (confirmDelete) {
+        fetch(`${apiUrl}/api/trainingRegistration/${trainingId}`, {
+            method: 'DELETE',
+        })
+            .then(response => {
+                if (response.ok) {
+                    fetchRegisteredTrainings(); // Refresh table after deletion
+                } else {
+                    console.error('Failed to delete training registration');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting training registration:', error);
+            });
+    }
+}
+
 (function() {
   "use strict";
 
